@@ -3,7 +3,7 @@
   "description": "MEAN.io: A fullstack JavaScript framework powered by MongoDB, ExpressJS, AngularJS, NodeJS.",
   "version": "0.5.5",
   "private": false,
-  "author": "Linnovate <mean@linnovate.net>",
+  "author": "Edward Zhu and Josh Fermin",
   "contributors": "https://github.com/linnovate/mean/graphs/contributors",
   "mean": "0.5.5",
   "repository": {
@@ -50,7 +50,7 @@
     "request": "latest",
     "serve-favicon": "latest",
     "shelljs": "latest",
-    "soundcloud-node": "0.0.10",
+    "soundcloud-node": "latest",
     "swig": "latest",
     "view-helpers": "latest"
   },
