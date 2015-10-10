@@ -24,12 +24,12 @@ var redirectHandler = function(req, res) {
   var code = req.query.code;
  
   SC.authorize(code, function(err, accessToken) {
-    if ( err ) {
-      throw err;
-    } else {
-      // Client is now authorized and able to make API calls
-      console.log('access token:', accessToken);
-    }
+	if ( err ) {
+	  throw err;
+	} else {
+	  // Client is now authorized and able to make API calls
+	  console.log('access token:', accessToken);
+	}
   });
 };
 
@@ -54,38 +54,68 @@ var redirectHandler = function(req, res) {
 
 // josh soundcloud id: 15655722
 // gbyo soundcloud id: 149515896
-SC.get('/users/15655722/favorites', function(err, fav) {
-	  if ( err ) {
-	    throw err;
-	  } else {
-	  	for (var i = 2 - 1; i >= 0; i--) {
-	  		var q = []
-	  		// if user_id in database then don't api call
-	  		// if(fav[1].user_id);
 
-	  		//else
-	  		// else api call on the user to get the location info 
-			SC.get('/users/' + fav[i].user_id, function(err, user) {
-				if ( err ) {
-					throw err;
-					} else {
-						q = {user_id:user.id, track_id:fav[i].id, country:user.country, city:user.city}
-						Data.create(q, function(err,doc){
-					  if(err) throw err;
-				})
-
-				console.log('retrieved:', user);
-				}
-			});
-	  	};
-	  	// console.log("user_id", fav.length);
-	   // SC.get('users/' + fav.user_id;
-	  }
-});
+function add_to_db(userid, counter, limit)
+{
+	counter += 1;
+	if (counter >= limit) { return };
+	SC.get('/users/' + userid + '/favorites', function(err, fav) {
 
 
+		  if ( err ) {
+			throw err;
+		  } else {
+			for (var i = fav.length - 1; i >= 0; i--) {
+				var q = new Object();
+				// if user_id in database then don't api call
+				// if(fav[1].user_id);
+				console.log(fav[i])
+				// q["_id"]=fav[i].id
+				q["track_id"]=fav[i].id;
+				q["playback_count"]=fav[i].playback_count
+				//else
+				// else api call on the user to get the location info 
+				SC.get('/users/' + fav[i].user_id, function(err, user) {
+					if ( err ) {
+						throw err;
+						} else {
+							q["user_id"]=user.id
+							q["country"]=user.country
+							q["city"]=user.city
+							console.log(q)
+							Data.create(q, function(err,doc){
+								  if(err) throw err;
+							})
+							// add_to_db(user.id);
+					// console.log('retrieved:', user);
+						}
+					});
+				};
+			// console.log("user_id", fav.length);
+		   // SC.get('users/' + fav.user_id;
+		  }
+	});
+}
+
+add_to_db(15655722,0,5);
 
 
-// # SOUNDCLOUD_ID=5feebc323728bc797a5363bec7d84a30
-// # SOUNDCLOUD_SECRET=7e160e8321b393b6ffa507cda10e020c
-// # SOUNDCLOUD_URI=https://soundcloud.com/connect
+
+// function get_user(fav, q)
+// {
+// 	SC.get('/users/' + fav[i].user_id, function(err, user) {
+// 		if ( err ) {
+// 			throw err;
+// 			} else {
+// 				q["user_id"]=user.id
+// 				q["country"]=user.country
+// 				q["city"]=user.city
+// 				console.log(q)
+// 				Data.create(q, function(err,doc){
+// 			  if(err) throw err;
+// 		})
+
+// 		// console.log('retrieved:', user);
+// 		}
+// 	});
+// }
