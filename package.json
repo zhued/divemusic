@@ -27,6 +27,7 @@
     "connect-flash": "latest",
     "consolidate": "latest",
     "cookie-parser": "latest",
+    "dotenv": "^1.2.0",
     "errorhandler": "latest",
     "express": "latest",
     "forever": "latest",

@@ -1,7 +1,8 @@
 'use strict';
+require('dotenv').load();
 
 module.exports = {
-  db: 'mongodb://' + ('hackcu:hackcu@ds041643.mongolab.com:41643/divemusic' || 'localhost') + '/mean-prod',
+  db: 'mongodb://' + (process.env.DB_CONNECTION || 'localhost') + '/mean-prod',
   /**
    * Database options that will be passed directly to mongoose.connect
    * Below are some examples.

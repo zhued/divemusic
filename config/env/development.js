@@ -1,7 +1,8 @@
 'use strict';
+require('dotenv').load();
 
 module.exports = {
-  db: 'mongodb://' + ('hackcu:hackcu@ds041643.mongolab.com:41643/divemusic' || 'localhost') + '/mean-dev',
+  db: 'mongodb://' + (process.env.DB_CONNECTION || 'localhost') + '/mean-dev',
   debug: true,
   logging: {
     format: 'tiny'
