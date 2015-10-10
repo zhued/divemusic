@@ -55,49 +55,56 @@ var redirectHandler = function(req, res) {
 // josh soundcloud id: 15655722
 // gbyo soundcloud id: 149515896
 
-function add_to_db(userid, counter, limit)
+function find_favorites(userid, counter, limit)
 {
 	counter += 1;
 	if (counter >= limit) { return };
 	SC.get('/users/' + userid + '/favorites', function(err, fav) {
+	  if ( err ) {
+		throw err;
+	  } else {
+		for (var i = fav.length - 1; i >= 0; i--) {
+			var q = new Object();
+			// if user_id in database then don't api call
+			// if(fav[1].user_id);
+			// console.log(fav[i])
+			// q["_id"]=fav[i].id
+			q["track_id"]=fav[i].id;
+			q["playback_count"]=fav[i].playback_count;
+      add_to_db(q, fav[i]);
+		};
 
-
-		  if ( err ) {
-			throw err;
-		  } else {
-			for (var i = fav.length - 1; i >= 0; i--) {
-				var q = new Object();
-				// if user_id in database then don't api call
-				// if(fav[1].user_id);
-				console.log(fav[i])
-				// q["_id"]=fav[i].id
-				q["track_id"]=fav[i].id;
-				q["playback_count"]=fav[i].playback_count
-				//else
-				// else api call on the user to get the location info 
-				SC.get('/users/' + fav[i].user_id, function(err, user) {
-					if ( err ) {
-						throw err;
-						} else {
-							q["user_id"]=user.id
-							q["country"]=user.country
-							q["city"]=user.city
-							console.log(q)
-							Data.create(q, function(err,doc){
-								  if(err) throw err;
-							})
-							// add_to_db(user.id);
-					// console.log('retrieved:', user);
-						}
-					});
-				};
-			// console.log("user_id", fav.length);
-		   // SC.get('users/' + fav.user_id;
-		  }
+    for (var i = fav.length - 1; i >= 0; i--) {
+      find_favorites(fav[i].user_id, counter, limit)
+    };
+		// console.log("user_id", fav.length);
+	   // SC.get('users/' + fav.user_id;
+	  }
 	});
 }
 
-add_to_db(15655722,0,5);
+function add_to_db(q, fav)
+{
+  SC.get('/users/' + fav.user_id, function(err, user) {
+        if ( err ) {
+          throw err;
+          } else {
+            q["user_id"]=user.id;
+            q["country"]=user.country;
+            q["city"]=user.city;
+            console.log(q)
+            if (user.country || user.city) {
+              Data.create(q, function(err,doc){
+               if(err) throw err;
+            })
+            };
+            // add_to_db(user.id);
+        // console.log('retrieved:', user);
+          }
+        });
+}
+
+find_favorites(15655722,0,3);
 
 
 
