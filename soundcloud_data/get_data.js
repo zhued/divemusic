@@ -58,7 +58,9 @@ var redirectHandler = function(req, res) {
 function find_favorites(userid, counter, limit)
 {
 	counter += 1;
-	if (counter >= limit) { return };
+	if (counter >= limit) { 
+    // db.DB_close();
+    return; };
 	SC.get('/users/' + userid + '/favorites', function(err, fav) {
 	  if ( err ) {
 		throw err;
@@ -68,7 +70,6 @@ function find_favorites(userid, counter, limit)
 			// if user_id in database then don't api call
 			// if(fav[1].user_id);
 			// console.log(fav[i])
-			// q["_id"]=fav[i].id
 			q["track_id"]=fav[i].id;
 			q["playback_count"]=fav[i].playback_count;
       add_to_db(q, fav[i]);
@@ -104,7 +105,7 @@ function add_to_db(q, fav)
         });
 }
 
-find_favorites(15655722,0,3);
+find_favorites(4114825,0,3);
 
 
 
