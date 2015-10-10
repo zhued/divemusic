@@ -33,14 +33,16 @@ var redirectHandler = function(req, res) {
   });
 };
 
+function get_user(name){
+  SC.get('/resolve', { url: 'https://soundcloud.com/'+name}, function(err, user) {
+   if ( err ) {
+      throw err;
+    } else {
+      console.log(user);
+    }
+  });
+}
 
-// SC.get('/resolve', { url: 'https://soundcloud.com/gbyo'}, function(err, user) {
-// 	 if ( err ) {
-// 	    throw err;
-// 	  } else {
-//   		console.log(user);
-// 	  }
-// });
 
 
 // SC.get('/users/149515896', function(err, user) {
@@ -105,7 +107,8 @@ function add_to_db(q, fav)
         });
 }
 
-find_favorites(4114825,0,3);
+var user_id = get_user('Shakira');
+// find_favorites(user_id,0,4);
 
 
 
