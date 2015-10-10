@@ -21,8 +21,8 @@
   "dependencies": {
     "assetmanager": "latest",
     "async": "latest",
-    "bower": "latest",
     "body-parser": "latest",
+    "bower": "latest",
     "compression": "latest",
     "connect-flash": "latest",
     "consolidate": "latest",
@@ -49,6 +49,7 @@
     "request": "latest",
     "serve-favicon": "latest",
     "shelljs": "latest",
+    "soundcloud-node": "0.0.10",
     "swig": "latest",
     "view-helpers": "latest"
   },
