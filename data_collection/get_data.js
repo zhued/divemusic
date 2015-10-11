@@ -38,7 +38,9 @@ function get_user(name){
    if ( err ) {
       throw err;
     } else {
-      console.log(user);
+      var beginning = user.location.split('users/')[1];
+      var res = beginning.split('.json')[0];
+      console.log(res);
     }
   });
   db.DB_close();
@@ -100,8 +102,8 @@ function add_to_db(q, fav)
             console.log(q)
             if (user.country || user.city) {
               Data.create(q, function(err,doc){
-               if(err) throw err;
-            })
+                if(err) throw err;
+              })
             };
             // add_to_db(user.id);
         // console.log('retrieved:', user);
@@ -109,8 +111,10 @@ function add_to_db(q, fav)
         });
 }
 
-// var user_id = get_user('theupbeats');
-find_favorites(14438,0,4);
+
+// get_user('harlem_fetty');
+find_favorites(35225382,0,6);
+
 
 
 
