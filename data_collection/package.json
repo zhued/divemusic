@@ -1,0 +1,16 @@
+{
+  "name": "divemusic",
+  "version": "0.0.1",
+  "description": "divemusic",
+  "author": "Edward Zhu, Josh Fermin",
+  "License": "MIT",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "dependencies": {
+    "dotenv": "0.5.1",
+    "mongoose": "*3.8.23",
+    "node-soundcloud": "0.0.3"
+  }
+}

@@ -15,38 +15,7 @@
   <div ng-controller="HomeController as ui" class="container full-h">
     <div id="container" style="position: relative; width: 800px; height: 600px;"></div>
     <p>hello</p>
-    <div ng-show="ui.response">
-
-      <div id="chart"></div>
-
-      <form ng-submit="ui.dateFilter()" class="form-inline" style="margin-bottom: 20px">
-        <div class="form-group">
-          <label for="from">Filter Dates From: </label>
-          <input id="from" type="date" class="form-control" ng-model="ui.fromDate"/>
-        </div>
-        <div class="form-group">
-          <label for="to">To: </label>
-          <input id="to" type="date" class="form-control" ng-model="ui.toDate"/>
-        </div>
-        <button type="submit" class="btn btn-default">Filter</button>
-      </form>
-      
-      <div id="gameTable">
-        <table class="table">
-          <tr>
-            <th>Time Played</th><th>End Time</th><th>Game ID</th>
-          </tr>
-          <tr ng-repeat="item in ui.resData">
-            <td>{{item.timePlayed}}</td>
-            <td>{{item.gameEndtime}}</td>
-            <td>{{item.game_id}}</td>
-          </tr>
-        </table>
-      </div>
-
     </div>
-
-<!-- Search: <input type="text" my-on-key-down-call="callRestService()">    -->
   </div>
 </body>
 </html>

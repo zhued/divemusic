@@ -41,6 +41,7 @@ function get_user(name){
       var beginning = user.location.split('users/')[1];
       var res = beginning.split('.json')[0];
       console.log(res);
+      return res;
     }
   });
   db.DB_close();
@@ -69,7 +70,7 @@ function find_favorites(userid, counter, limit)
     return; };
 	SC.get('/users/' + userid + '/favorites', function(err, fav) {
 	  if ( err ) {
-		throw err;
+		console.log(err);
 	  } else {
 		for (var i = fav.length - 1; i >= 0; i--) {
 			var q = new Object();
@@ -102,7 +103,7 @@ function add_to_db(q, fav)
             console.log(q)
             if (user.country || user.city) {
               Data.create(q, function(err,doc){
-                if(err) throw err;
+                if(err) console.log(err);
               })
             };
             // add_to_db(user.id);
@@ -113,7 +114,8 @@ function add_to_db(q, fav)
 
 
 // get_user('harlem_fetty');
-find_favorites(35225382,0,6);
+// get_user('jamal-gutierrez')
+find_favorites(39542193,0,6);
 
 
 

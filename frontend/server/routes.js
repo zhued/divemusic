@@ -1,7 +1,6 @@
 var db     = require('./mongo.js'),
 // timeParser = require('./timeParse.js');
-games      = db.dataInit('games'),
-summoners  = db.dataInit('summoners');
+games      = db.dataInit('track');
 
 
 module.exports = function(app){
@@ -10,12 +9,9 @@ module.exports = function(app){
     res.render('index');
   });
 
-
-// ***
-// Gets times for a certain summoner
-// ***
-var cachedGames = [];
-
+  // ***
+  // Gets track for a country
+  // ***
   app.get('/summoner/:summoner_name', function(req,res){
   	summoners.find({ summoner_short:req.params.summoner_name }, function(err,doc){
   		if(err) res.send(err);
@@ -28,5 +24,4 @@ var cachedGames = [];
       });
   	});
   });
-
 };
