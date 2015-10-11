@@ -2,7 +2,7 @@ var mongoose    = require('mongoose');
 require('dotenv').load();
 
 
-mongoose.connect(process.env.DB_CONNECT);
+mongoose.connect(process.env.DB_CONNECTION);
 
 
 var Any = new mongoose.Schema({ any: mongoose.Schema.Types.Mixed },{ strict: false });
