@@ -1,4 +1,11 @@
 var app = angular.module('divemusic', []);
+app.config(function($sceDelegateProvider) {
+  $sceDelegateProvider.resourceUrlWhitelist([
+    'self',
+    'https://w.soundcloud.com/**'
+  ]);
+});
+
 
 app.controller('HomeController', ['$http', '$scope', function($http, $scope) {
 	var map = new Datamap({
@@ -33,20 +40,24 @@ app.controller('HomeController', ['$http', '$scope', function($http, $scope) {
 			});
 		}
 	});
-	
+
+	$scope.getIframeSrc = function(src) {
+	  return 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/' + src + '&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true';
+	};
+
 	var ui = this;
 	ui.response = false;
 
-	ui.getSummoner = function() {
-		if (ui.summonerName) {
-			var querystring = (ui.summonerName).toLowerCase().replace(/ /g, '');
-			$http.get('/summoner/'+querystring).success(function(data) {
-				ui.resData = data;
-				ui.timeData = timeParse(data);
-				ui.summoner = data[0].summoner_id;
-				drawCal();
-				ui.response = true;
-			});
-		}
-	};
+	// ui.getSummoner = function() {
+	// 	if (ui.summonerName) {
+	// 		var querystring = (ui.summonerName).toLowerCase().replace(/ /g, '');
+	// 		$http.get('/summoner/'+querystring).success(function(data) {
+	// 			ui.resData = data;
+	// 			ui.timeData = timeParse(data);
+	// 			ui.summoner = data[0].summoner_id;
+	// 			drawCal();
+	// 			ui.response = true;
+	// 		});
+	// 	}
+	// };
 }]);

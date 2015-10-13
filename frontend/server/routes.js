@@ -23,7 +23,7 @@ module.exports = function(app){
   // Gets track for a country
   // ***
   app.get('/toptracks/:country', function(req,res){
-  	var q = tracks.find({country:req.params.country}).sort({playback_count: -1});
+  	var q = tracks.find({country:req.params.country}).sort({playback_count: -1}).limit(10);
     q.exec(function(err, tracks){
       if (err) throw err;
       res.status(200).send(tracks);

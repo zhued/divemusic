@@ -17,8 +17,9 @@
     <div id="container" style="position: relative; width: 1000px; height: 600px;"></div>
     <h2>{{selectedCountry}}</h2>
     <!-- {{toptracks}} -->
-    <div ng-repeat="x in toptracks">
-    	{{x.track_id}}
+    <div ng-repeat="track in toptracks">
+    	<!-- {{track.track_id}} -->
+    	<iframe width="100%" height="200" scrolling="no" frameborder="no" ng-src="{{getIframeSrc(track.track_id)}}"></iframe>
     </div>
   </div>
 
