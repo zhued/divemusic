@@ -16,6 +16,10 @@
     <h1>divemusic.io</h1>
     <div id="container" style="position: relative; width: 1000px; height: 600px;"></div>
     <h2>{{selectedCountry}}</h2>
+    <!-- {{toptracks}} -->
+    <div ng-repeat="x in toptracks">
+    	{{x.track_id}}
+    </div>
   </div>
 
 </body>

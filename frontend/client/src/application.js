@@ -12,20 +12,26 @@ app.controller('HomeController', ['$http', '$scope', function($http, $scope) {
 		},
 		done: function(datamap) {
 			datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
-					var m = {};
-					m[geography.id] = '#000000';
-					datamap.updateChoropleth(m);
-					var country = geography.properties.name;
-					$scope.selectedCountry = country;
-					$http({
-						method: 'GET',
-						url: '/toptracks/' + country
-					}).then(function(topTracks){
-						$scope.toptracks = topTracks;
-					})
+				var m = {};
+				m[geography.id] = '#000000';
+				datamap.updateChoropleth(m);
+				var country = geography.properties.name;
+				$scope.selectedCountry = country;
+				$http({
+					method: 'GET',
+					url: '/toptracks/' + country
+				}).then(function(topTracks){
+					// $scope.toptracks = topTracks;
+					// var top = [];
 
+					// topTracks.data.forEach(function(track){
+						// newtrack = angular.toJson(track);
+						// top.push(newtrack);
+					// })
+					$scope.toptracks = topTracks.data;
 				});
-			}
+			});
+		}
 	});
 	
 	var ui = this;
