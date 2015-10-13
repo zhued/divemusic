@@ -1,6 +1,6 @@
 var app = angular.module('divemusic', []);
 
-app.controller('HomeController', ['$http', function($http) {
+app.controller('HomeController', ['$http', '$scope', function($http, $scope) {
 	var map = new Datamap({
 		element: document.getElementById('container'),
 		fills: {
@@ -16,9 +16,12 @@ app.controller('HomeController', ['$http', function($http) {
 					m[geography.id] = '#000000';
 					datamap.updateChoropleth(m);
 					var country = geography.properties.name;
+					$scope.selectedCountry = country;
 					$http({
 						method: 'GET',
-						url: '/country/' + country
+						url: '/toptracks/' + country
+					}).then(function(topTracks){
+						$scope.toptracks = topTracks;
 					})
 
 				});
