@@ -9,11 +9,24 @@ module.exports = function(app){
     res.render('index');
   });
 
+
+  // ***
+  // Gets total amount of tracks we have in db
+  // ***
+  app.get('/count', function(req,res){
+    tracks.count({}, function(err, count){
+      res.status(200).send(String(count));
+    });
+  });
+
   // ***
   // Gets track for a country
   // ***
   app.get('/toptracks/:country', function(req,res){
-  	var q = tracks.find({country:req.params.country});
-    console.log(q);
+  	var q = tracks.find({country:req.params.country}).sort({playback_count: -1});
+    q.exec(function(err, tracks){
+      if (err) throw err;
+      res.status(200).send(tracks);
+    })
   });
 };
