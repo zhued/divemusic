@@ -23,6 +23,9 @@ app.controller('HomeController', ['$http', '$scope', function($http, $scope) {
 				m[geography.id] = '#000000';
 				datamap.updateChoropleth(m);
 				var country = geography.properties.name;
+				if(country == "United States of America") country = "United States"
+				if(country == "South Korea") country = "Korea (South)"
+
 				$scope.selectedCountry = country;
 				$http({
 					method: 'GET',
