@@ -1,4 +1,5 @@
 # Dive Music
+<a href="http://joshfermin.me/2015/10/10/dive-music-hackathon/">Josh's Blog Post on Divemusic</a>
 
 ## Unifying the world, one sound bit at a time.
 
